@@ -13,6 +13,7 @@ describe('buildAdoptersList', () => {
     await buildAdoptersList();
 
     expect(writeJSON).toHaveBeenCalledWith(expectedReadPath, expectedWritePath);
+    console.log("random")
   });
 
 });
