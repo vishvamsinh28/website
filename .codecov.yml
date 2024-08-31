@@ -8,11 +8,14 @@ comment:
   show_project: true
   show_files: true
   show_coverage: true
-  coverage_layout: "percentage"
+  coverage_layout: "table"
   coverage_sections: 
-    - Filename
-    - Percentage
-    - Uncovered Lines
+    - File
+    - "% Stmts"
+    - "% Branch"
+    - "% Funcs"
+    - "% Lines"
+    - "Uncovered Line #s"
 
 coverage:
   status:
@@ -36,7 +39,7 @@ parsers:
 flags:
   unittests:
     paths:
-      - tests/
+      - scripts/
 
 comment_flags:
   - unittests
