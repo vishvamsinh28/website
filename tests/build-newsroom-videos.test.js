@@ -44,6 +44,7 @@ describe('buildNewsroomVideos', () => {
         const response = readFileSync(testFilePath, 'utf8');
         expect(response).toEqual(expectedResult);
         expect(result).toEqual(expectedResult);
+        console.log("Hello World!")
     });
 
     it('should handle fetch errors', async () => {
