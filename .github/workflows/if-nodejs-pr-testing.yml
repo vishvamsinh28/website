@@ -78,8 +78,5 @@ jobs:
         uses: codecov/codecov-action@v4
         with:
           fail_ci_if_error: true
-          files: ./coverage/lcov.info
-          flags: unittests
-          name: codecov-umbrella
           token: 25358ea8-8f8c-4ee1-aff3-282914082378
           verbose: true
