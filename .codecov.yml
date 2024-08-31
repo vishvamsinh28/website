@@ -1,40 +1,32 @@
+# codecov.yml
 coverage:
   status:
     project:
       default:
         target: auto
-        threshold: 0%
-        base: auto
-        flags: 
-          - unit
-        paths: 
-          - "src"
-       # new: auto
-        # threshold: 1%
-        informational: true
-    patch: off
+        required: true
 
-comment:
-  layout: "reach, diff, flags, files"
-  behavior: default
-  require_changes: false
-  require_base: no
-  require_head: yes
-  show_carryforward_flags: true
+    patch:
+      default:
+        target: auto
+        required: true
 
-github_checks:
-  annotations: true
+  coverage:
+    files:
+      - "**/*.js"
 
-parsers:
-  javascript:
-    enable_partials: yes
+  reports:
+    html:
+      enabled: true
+    text:
+      enabled: true
+    json:
+      enabled: true
 
-ignore:
-  - "tests"
-  - "**/*.test.js"
-  - "**/*.spec.js"
-
-flags:
-  unit:
-    paths:
-      - src
+  pull_requests:
+    comments:
+      enabled: true
+      message: |
+        ### Code Coverage Report
+        [Codecov](https://codecov.io/gh/${{ github.repository }}/branch/${{ github.head_ref }}/graph/badge.svg) (Coverage Report)
+        Coverage Report: [codecov.io](https://codecov.io/gh/${{ github.repository }}/branch/${{ github.head_ref }})
