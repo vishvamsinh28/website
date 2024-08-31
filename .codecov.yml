@@ -1,19 +1,3 @@
-comment:
-  layout: "reach, diff, flags, files"
-  require_changes: true
-  after_n_builds: 1
-  show_coverage: true
-  show_files: true
-  coverage_layout: "table"
-  coverage_sections: 
-    - File
-    - "% Stmts"
-    - "% Branch"
-    - "% Funcs"
-    - "% Lines"
-    - "Uncovered Line #s"
-  carryforward: false
-
 coverage:
   status:
     project:
@@ -34,9 +18,32 @@ parsers:
       macro: yes
 
 flags:
-  unittests:
+  code:
     paths:
       - scripts/
+  tests:
+    paths:
+      - tests/
 
 comment_flags:
-  - unittests
+  - code
+  - tests
+
+comment:
+  layout: "reach, diff, flags, files"
+  behavior: default
+  require_changes: true
+  after_n_builds: 1
+  require_base: no
+  require_head: yes
+  show_project: true
+  show_files: true
+  show_coverage: true
+  coverage_layout: "table"
+  coverage_sections: 
+    - File
+    - "% Stmts"
+    - "% Branch"
+    - "% Funcs"
+    - "% Lines"
+    - "Uncovered Line #s"
