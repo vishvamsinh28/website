@@ -10,7 +10,9 @@ comment:
   show_coverage: true
   coverage_layout: "percentage"
   coverage_sections: 
-    - Uncovered Line
+    - Filename
+    - Percentage
+    - Uncovered Lines
 
 coverage:
   status:
