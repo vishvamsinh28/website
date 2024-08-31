@@ -1,13 +1,9 @@
 comment:
   layout: "reach, diff, flags, files"
-  behavior: default
   require_changes: true
   after_n_builds: 1
-  require_base: no
-  require_head: yes
-  show_project: true
-  show_files: true
   show_coverage: true
+  show_files: true
   coverage_layout: "table"
   coverage_sections: 
     - File
@@ -16,6 +12,7 @@ comment:
     - "% Funcs"
     - "% Lines"
     - "Uncovered Line #s"
+  carryforward: false
 
 coverage:
   status:
