@@ -3,27 +3,19 @@ coverage:
     project:
       default:
         target: auto
+        threshold: 1%
     patch:
       default:
         target: auto
-
-  precision: 2
-  round: down
-  range: "70...100"
-
-parsers:
-  gcov:
-    branch_detection:
-      conditional: yes
-      loop: yes
-      method: no
-      macro: no
+        threshold: 1%
 
 comment:
-  layout: "header, diff, files, footer"
+  layout: "reach, diff, flags, files"
   behavior: default
+  require_changes: false
+  require_base: no
+  require_head: yes
+  show_carryforward_flags: true
 
-show:
-    files: true
-    diff: true
-    unchanged: false
+github_checks:
+  annotations: true
