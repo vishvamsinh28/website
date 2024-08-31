@@ -1,36 +1,37 @@
+comment:
+  layout: "reach, diff, flags, files"
+  behavior: default
+  require_changes: true
+  require_base: true
+
 coverage:
   status:
     project:
       default:
         target: auto
-        required: true
-
     patch:
       default:
         target: auto
-        required: true
 
-  coverage:
-    files:
-      - "**/*.js"
+  precision: 2
+  round: down
+  range: "70...100"
+  
+  file:
+    enable: true
 
-  reports:
-    html:
-      enabled: true
-    text:
-      enabled: true
-    json:
-      enabled: true
+  threshold: 1%
 
-  pull_requests:
-    comments:
-      enabled: true
-      message: |
-        ### Code Coverage Report
-        | File                       | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s |
-        |----------------------------|---------|----------|---------|---------|-------------------|
-        | All files                  | ${coverage.all.files.statement.coverage} | ${coverage.all.files.branch.coverage} | ${coverage.all.files.function.coverage} | ${coverage.all.files.line.coverage} | ${coverage.all.files.uncovered_lines} |
-        | ${coverage.files.name}     | ${coverage.files.statement.coverage} | ${coverage.files.branch.coverage} | ${coverage.files.function.coverage} | ${coverage.files.line.coverage} | ${coverage.files.uncovered_lines} |
-        <!-- Add more entries here if needed -->
+flags:
+  unittests:
+    paths:
+      - "tests/"
 
-        For detailed coverage report, please check [Codecov Coverage Report](https://codecov.io/gh/${{ github.repository }}/branch/${{ github.head_ref }}/graph/badge.svg).
+parsers:
+  javascript:
+    - "coverage/lcov.info"
+
+report:
+  range: "50...100"
+  round: down
+  precision: 2
