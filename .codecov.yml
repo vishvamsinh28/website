@@ -1,40 +1,25 @@
+comment:
+  layout: "reach, diff, files, coverage"
+  behavior: default
+  require_changes: true
+  after_n_builds: 1
+  require_base: no
+  require_head: yes
+  show_project: true
+  show_files: true
+  show_coverage: true
+  coverage_layout: "percentage"
+
 coverage:
   status:
     project:
       default:
         target: auto
-        threshold: null
-        base: auto
-        branches: null
-        if_no_uploads: error
-        if_not_found: success
-        if_ci_failed: error
-        only_pulls: false
-        flags: null
-        paths: null
+        threshold: 0.5
     patch:
       default:
         target: auto
-        threshold: null
-        base: auto
-        branches: null
-        if_no_uploads: error
-        if_not_found: success
-        if_ci_failed: error
-        only_pulls: true
-        flags: null
-        paths: null
-
-comment:
-  layout: "reach, diff, flags, files"
-  behavior: default
-  require_changes: false
-
-flags:
-  unittests:
-    paths:
-      - "tests/"
-    carryforward: true
+        threshold: 0.5
 
 parsers:
   gcov:
@@ -42,4 +27,13 @@ parsers:
       conditional: yes
       loop: yes
       method: yes
-      macro: no
+      macro: yes
+
+flags:
+  unittests:
+    paths:
+      - tests/
+
+comment_flags:
+  - unittests
+
