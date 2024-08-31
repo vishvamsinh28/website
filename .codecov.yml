@@ -1,5 +1,5 @@
 comment:
-  layout: "reach, diff, files, coverage"
+  layout: "reach, diff, flags, files"
   behavior: default
   require_changes: true
   after_n_builds: 1
@@ -9,6 +9,8 @@ comment:
   show_files: true
   show_coverage: true
   coverage_layout: "percentage"
+  coverage_sections: 
+    - Uncovered Line
 
 coverage:
   status:
@@ -36,4 +38,3 @@ flags:
 
 comment_flags:
   - unittests
-
