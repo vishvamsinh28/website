@@ -11,7 +11,6 @@ const mockEvents = [
         start: { dateTime: '2024-02-20T16:00:00.000Z' },
     },
 ];
-
 const expectedContent = [
     {
         banner: "https://example.com/banner.jpg",
