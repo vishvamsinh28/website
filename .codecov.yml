@@ -1,37 +1,19 @@
-comment:
-  layout: "reach, diff, flags, files"
-  behavior: default
-  require_changes: true
-  require_base: true
-
 coverage:
   status:
     project:
       default:
         target: auto
+        threshold: 1%
+        base: auto
     patch:
       default:
         target: auto
+        threshold: 1%
+        base: auto
 
-  precision: 2
-  round: down
-  range: "70...100"
-  
-  file:
-    enable: true
-
-  threshold: 1%
-
-flags:
-  unittests:
-    paths:
-      - "tests/"
-
-parsers:
-  javascript:
-    - "coverage/lcov.info"
-
-report:
-  range: "50...100"
-  round: down
-  precision: 2
+comment:
+  layout: "reach, diff, flags, files"
+  behavior: default
+  require_changes: false
+  require_base: no
+  require_head: yes
