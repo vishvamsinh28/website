@@ -12,8 +12,31 @@ coverage:
         base: auto
 
 comment:
-  layout: "reach, diff, flags, files"
+  layout: "reach, diff, flags, files, footer"
   behavior: default
   require_changes: false
   require_base: no
   require_head: yes
+  show_carryforward_flags: true
+  hide_comment_details: false
+
+github_checks:
+  annotations: true
+
+flag_management:
+  default_rules:
+    carryforward: true
+
+coverage:
+  range: "50..80"
+  round: down
+  precision: 2
+
+  status:
+    project:
+      default:
+        target: auto
+        threshold: 1%
+    patch:
+      default:
+        target: auto
