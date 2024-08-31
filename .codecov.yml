@@ -1,22 +1,22 @@
 coverage:
-    status:
-      project:
-        default:
-          target: auto
-    precision: 2
-  comment:
-    layout: |
-      <summary>
-      <b>Coverage Summary:</b>
-      <br>
-      <b>File</b> | <b>% Stmts</b> | <b>% Branch</b> | <b>% Funcs</b> | <b>% Lines</b> | <b>Uncovered Line #s</b>
-      <br>
-      ---------------------------|---------|----------|---------|---------|-------------------
-      {{#coverage}}
-      {{file}}
-      | {{pct.stmt}} | {{pct.branch}} | {{pct.func}} | {{pct.line}} | {{#uncovered}}{{uncovered}}{{/uncovered}}
-      {{/coverage}}
-      ---------------------------|---------|----------|---------|---------|-------------------
-    version: 2
-  upload:
-    disable: false
+  status:
+    project:
+      default:
+        target: auto
+  precision: 2
+comment:
+  layout: |
+    <summary>
+    <b>Coverage Summary:</b>
+    <br>
+    <b>File</b> | <b>% Stmts</b> | <b>% Branch</b> | <b>% Funcs</b> | <b>% Lines</b> | <b>Uncovered Line #s</b>
+    <br>
+    ---------------------------|---------|----------|---------|---------|-------------------
+    {{#coverage}}
+    {{file}}
+    | {{pct.stmt}} | {{pct.branch}} | {{pct.func}} | {{pct.line}} | {{#uncovered}}{{uncovered}}{{/uncovered}}
+    {{/coverage}}
+    ---------------------------|---------|----------|---------|---------|-------------------
+  version: 2
+upload:
+  disable: false
