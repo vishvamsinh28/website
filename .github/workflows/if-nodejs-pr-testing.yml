@@ -81,5 +81,6 @@ jobs:
           fail_ci_if_error: true
           files: ./coverage/lcov.info
           name: codecov-umbrella
+          flags: unittests
           token: 25358ea8-8f8c-4ee1-aff3-282914082378
           verbose: true
