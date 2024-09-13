@@ -12,6 +12,6 @@ coverage:
         base: auto
 
 comment:
-  layout: "reach,diff,flags,tree,files,footer"
+  layout: "reach, diff, flags, files"
   behavior: default
   require_changes: no
