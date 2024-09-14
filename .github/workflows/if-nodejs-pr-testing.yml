@@ -76,6 +76,5 @@ jobs:
         name: Upload coverage to Coveralls
         run: |
           npx coveralls < coverage/lcov.info
-        env:
-          COVERALLS_REPO_TOKEN: LDtC0IJvprdLGo5HINFcy2Lc4e0zfICIb
+          github-token: LDtC0IJvprdLGo5HINFcy2Lc4e0zfICIb
         shell: bash
