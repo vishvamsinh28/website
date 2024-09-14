@@ -72,3 +72,10 @@ jobs:
         name: Run release assets generation to make sure PR does not break it
         shell: bash
         run: npm run generate:assets --if-present
+      - if: steps.packagejson.outputs.exists == 'true'
+        name: Upload coverage to Coveralls
+        run: |
+          npx coveralls < coverage/lcov.info
+        env:
+          COVERALLS_REPO_TOKEN: LDtC0IJvprdLGo5HINFcy2Lc4e0zfICIb
+        shell: bash
