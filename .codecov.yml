@@ -1,0 +1,22 @@
+comment:
+  layout: "reach,diff,files"  # Show both overall project coverage and per-file changes
+  behavior: default
+  require_changes: yes  # Only post a comment if coverage changes
+
+coverage:
+  precision: 2  # Show coverage with 2 decimal points
+  status:
+    project:
+      default:
+        target: auto
+    patch:
+      default:
+        target: auto
+
+parsers:
+  gcov:
+    branch_detection:
+      conditional: yes
+      loop: yes
+      method: yes
+      macro: no
