@@ -63,7 +63,6 @@ describe('buildNewsroomVideos', () => {
             status: 404,
             json: jest.fn().mockResolvedValue({}),
         });
-
         try {
             await buildNewsroomVideos(testFilePath);
         } catch (err) {
