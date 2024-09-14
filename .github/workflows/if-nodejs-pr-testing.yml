@@ -74,7 +74,7 @@ jobs:
         run: npm run generate:assets --if-present
       - if: steps.packagejson.outputs.exists == 'true'
         name: Run tests and collect coverage
-        run: npm test --coverage && coveralls coverage/lcov.info
+        run: npm test --coverage && npx coveralls coverage/lcov.info
         
       - if: steps.packagejson.outputs.exists == 'true'
         name: Comment with coverage report
