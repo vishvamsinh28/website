@@ -73,8 +73,11 @@ jobs:
         shell: bash
         run: npm run generate:assets --if-present
       - if: steps.packagejson.outputs.exists == 'true'
-        name: Upload coverage to Coveralls
-        run: |
-          npx coveralls < coverage/lcov.info
-          github-token: LDtC0IJvprdLGo5HINFcy2Lc4e0zfICIb
-        shell: bash
+        name: Run tests and collect coverage
+        run: npm test --coverage && coveralls coverage/lcov.info
+        
+      - if: steps.packagejson.outputs.exists == 'true'
+        name: Comment with coverage report
+        uses: coveralls-comment/action@v1
+        with:
+          token: LDtC0IJvprdLGo5HINFcy2Lc4e0zfICIb
