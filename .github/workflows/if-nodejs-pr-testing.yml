@@ -60,7 +60,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "${{ steps.nodeversion.outputs.version }}"
-
       - name: Install dependencies
         run: npm ci
       - if: steps.packagejson.outputs.exists == 'true'
@@ -74,10 +73,11 @@ jobs:
         shell: bash
         run: npm run generate:assets --if-present
       - if: steps.packagejson.outputs.exists == 'true'
-        name: Upload coverage to Coveralls
-        run: |
-          npx coveralls < coverage/lcov.info
-        env:
-          COVERALLS_REPO_TOKEN: LDtC0IJvprdLGo5HINFcy2Lc4e0zfICIb
-        shell: bash
+        name: Run tests and collect coverage
+        run: npm test --coverage && npx coveralls coverage/lcov.info
         
+      - if: steps.packagejson.outputs.exists == 'true'
+        name: Comment with coverage report
+        uses: coveralls-comment/action@v1
+        with:
+          token: LDtC0IJvprdLGo5HINFcy2Lc4e0zfICIb
