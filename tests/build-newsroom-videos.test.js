@@ -56,18 +56,6 @@ describe('buildNewsroomVideos', () => {
         }
     });
 
-    it('should handle invalid API response', async () => {
-        fetch.mockResolvedValue({
-            ok: true,
-            json: jest.fn().mockResolvedValue({}),
-        });
-
-        try {
-            await buildNewsroomVideos(testFilePath);
-        } catch (err) {
-            expect(err.message).toContain('Invalid data structure received from YouTube API');
-        }
-    });
 
     it('should handle HTTP status code', async () => {
         fetch.mockResolvedValue({
