@@ -79,6 +79,6 @@ jobs:
         uses: codecov/codecov-action@e28ff129e5465c2c0dcc6f003fc735cb6ae0c673
         with:
           fail_ci_if_error: true
-          files: ./coverage/coverage-final.json
+          files: ./coverage/lcov.info
           token: 25358ea8-8f8c-4ee1-aff3-282914082378
           verbose: true
