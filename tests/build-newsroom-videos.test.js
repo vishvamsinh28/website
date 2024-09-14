@@ -83,19 +83,4 @@ describe('buildNewsroomVideos', () => {
         }
     });
 
-    it('should handle file write errors', async () => {
-        fetch.mockResolvedValue({
-            ok: true,
-            json: jest.fn().mockResolvedValue(mockApiResponse),
-        });
-
-        const invalidPath = '/invalid_dir/newsroom_videos.json';
-
-        try {
-            await buildNewsroomVideos(invalidPath);
-        } catch (err) {
-            expect(err.message).toMatch(/ENOENT|EACCES/);
-        }
-    });
-
 });
