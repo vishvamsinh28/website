@@ -82,5 +82,4 @@ describe('buildNewsroomVideos', () => {
             expect(err.message).toContain('HTTP error! with status code: 404');
         }
     });
-
 });
