@@ -113,5 +113,4 @@ describe('buildMeetings', () => {
             expect(err.message).toMatch(/ENOENT|EACCES/);
         }
     });
-
 });
