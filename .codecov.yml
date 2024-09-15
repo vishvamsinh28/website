@@ -1,20 +1,31 @@
-# Specify that we want to see the total coverage report
-coverage:
-  precision: 2  # Show coverage with 2 decimal points
-  round: down  # Rounds down the coverage percentage
-
-# Ensure both the total and the diff coverage is shown
-comment:
-  layout: "reach,diff,files"  # Show total coverage, PR diff coverage, and affected files
-  behavior: default  # Add a comment on every commit, not just the first
-
-# PR behavior, to show only changed files coverage
 coverage:
   status:
     project:
       default:
-        target: auto  # Use automatic target based on current branch
+        # basic
+        target: auto
+        threshold: null
+        base: auto
+        # advanced
+        branches: null
+        if_no_uploads: error
+        if_not_found: success
+        if_ci_failed: error
+        only_pulls: false
+        flags: null
+        paths: null
     patch:
       default:
-        target: auto  # Use automatic target for patch (modified files)
-        threshold: 1%  # Allow 1% drop in coverage for patches
+        # basic
+        target: auto
+        threshold: null
+        base: auto
+        # advanced
+        branches: null
+        if_no_uploads: error
+        if_not_found: success
+        if_ci_failed: error
+        # the main change:
+        only_pulls: true
+        flags: null
+        paths: null
