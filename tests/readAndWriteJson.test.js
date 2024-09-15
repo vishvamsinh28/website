@@ -71,8 +71,6 @@ describe('writeJSON', () => {
     } catch (err) {
       expect(err.message).toBe(`Error while writing file\nError: ${error}`);
     }
-
     expect(fs.writeFile).toHaveBeenCalledWith(writePath, JSON.stringify(jsonObject));
   });
-
 });
