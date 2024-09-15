@@ -75,5 +75,5 @@ describe('writeJSON', () => {
     expect(fs.writeFile).toHaveBeenCalledWith(writePath, JSON.stringify(jsonObject));
   });
 
-  console.log("GxEffewgegeflo")
+  console.log("GxEffewgelo")
 });
