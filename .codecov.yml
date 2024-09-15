@@ -1,8 +1,20 @@
+# Specify that we want to see the total coverage report
+coverage:
+  precision: 2  # Show coverage with 2 decimal points
+  round: down  # Rounds down the coverage percentage
+
+# Ensure both the total and the diff coverage is shown
 comment:
-  layout: "newheader, diff, files"
-  require_changes: false
-  require_base: false
-  require_head: true
-  show_carryforward_flags: true 
-  show_critical_paths: true
-  hide_comment_details: true
+  layout: "reach,diff,files"  # Show total coverage, PR diff coverage, and affected files
+  behavior: default  # Add a comment on every commit, not just the first
+
+# PR behavior, to show only changed files coverage
+coverage:
+  status:
+    project:
+      default:
+        target: auto  # Use automatic target based on current branch
+    patch:
+      default:
+        target: auto  # Use automatic target for patch (modified files)
+        threshold: 1%  # Allow 1% drop in coverage for patches
