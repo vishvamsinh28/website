@@ -1,0 +1,8 @@
+comment:
+  layout: "newheader, diff, files"
+  require_changes: false
+  require_base: false
+  require_head: true
+  show_carryforward_flags: true 
+  show_critical_paths: true
+  hide_comment_details: true
