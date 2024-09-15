@@ -2,15 +2,31 @@ coverage:
   status:
     project:
       default:
-        target: auto
-        threshold: null
-        base: auto
-        flags: null
-        paths: null
+        # Set the threshold below which PRs will fail
+        threshold: 1%
     patch:
       default:
-        target: auto
-        threshold: null
-        base: auto
-        flags: null
-        paths: null
+        # PRs should have at least this much coverage
+        min: 80%
+    changes: no
+
+comment:
+  layout: "header, diff, files, footer"
+  behavior: default
+  require_changes: yes
+
+# Customize the behavior for pull requests
+fixes:
+  carryforward: yes  # Ensure the coverage status is maintained between runs
+  paths:
+    - "**/*.js"
+    - "**/*.ts"
+
+parsers:
+  js:
+    enable_partials: yes  # To show partial coverage of lines in JS files
+
+ignore:
+  - "node_modules"
+  - "tests/mock_data"
+  - "**/coverage/**"
