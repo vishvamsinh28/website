@@ -32,4 +32,5 @@ describe('start function', () => {
     expect(buildAdoptersList).toHaveBeenCalled();
     expect(buildFinanceInfoList).toHaveBeenCalled();
   });
+
 });
