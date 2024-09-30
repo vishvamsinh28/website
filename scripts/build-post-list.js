@@ -15,13 +15,6 @@ const result = {
   docsTree: {}
 }
 const releaseNotes = []
-const basePath = 'pages'
-const postDirectories = [
-  // order of these directories is important, as the blog should come before docs, to create a list of available release notes, which will later be used to release-note-link for spec docs
-  [`${basePath}/blog`, '/blog'],
-  [`${basePath}/docs`, '/docs'],
-  [`${basePath}/about`, '/about']
-];
 
 const addItem = (details) => {
   if(details.slug.startsWith('/docs'))
@@ -33,18 +26,18 @@ const addItem = (details) => {
   else {}
 }
 
-module.exports = async function buildPostList() {
-  walkDirectories(postDirectories, result)
+module.exports = async function buildPostList(postDirectories, basePath, writeFilePath) {
+  walkDirectories(postDirectories, result, basePath)
   const treePosts = buildNavTree(result["docs"].filter((p) => p.slug.startsWith('/docs/')))
   result["docsTree"] = treePosts
   result["docs"] = addDocButtons(result["docs"], treePosts)
   if (process.env.NODE_ENV === 'production') {
     // console.log(inspect(result, { depth: null, colors: true }))
   }
-  writeFileSync(resolve(__dirname, '..', 'config', 'posts.json'), JSON.stringify(result, null, '  '))
+  writeFileSync(writeFilePath, JSON.stringify(result, null, '  '))
 }
 
-function walkDirectories(directories, result, sectionWeight = 0, sectionTitle, sectionId, rootSectionId) {
+function walkDirectories(directories, result, basePath, sectionWeight = 0, sectionTitle, sectionId, rootSectionId) {
   for (let dir of directories) {
     let directory = dir[0]
     let sectionSlug = dir[1] || ''
@@ -79,7 +72,7 @@ function walkDirectories(directories, result, sectionWeight = 0, sectionTitle, s
         details.slug = slug
         addItem(details)
         const rootId = details.parent || details.rootSectionId
-        walkDirectories([[fileName, slug]], result, details.weight, details.title, details.sectionId, rootId)
+        walkDirectories([[fileName, slug]], result, basePath, details.weight, details.title, details.sectionId, rootId)
       } else if (file.endsWith('.mdx') && !fileName.endsWith('/_section.mdx')) {
         const fileContent = readFileSync(fileName, 'utf-8')
         // Passing a second argument to frontMatter disables cache. See https://github.com/asyncapi/website/issues/1057
