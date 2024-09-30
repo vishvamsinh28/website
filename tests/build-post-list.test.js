@@ -3,15 +3,19 @@ const { resolve, join } = require('path');
 const { buildPostList, slugifyToC } = require('../scripts/build-post-list');
 
 describe('buildPostList', () => {
-  const tempDir = resolve(__dirname, 'tempTestDir');
-  const writeFilePath = resolve(tempDir, 'posts.json');
-  const postDirectories = [
-    [join(tempDir, 'blog'), '/blog'],
-    [join(tempDir, 'docs'), '/docs'],
-    [join(tempDir, 'about'), '/about'],
-  ];
+  let tempDir;
+  let writeFilePath;
+  let postDirectories;
 
-  beforeAll(() => {
+  beforeEach(() => {
+    tempDir = resolve(__dirname, `tempTestDir_${Date.now()}`);
+    writeFilePath = resolve(tempDir, 'posts.json');
+    postDirectories = [
+      [join(tempDir, 'blog'), '/blog'],
+      [join(tempDir, 'docs'), '/docs'],
+      [join(tempDir, 'about'), '/about'],
+    ];
+
     mkdirSync(tempDir, { recursive: true });
 
     // Create blog directory with a release note
@@ -30,7 +34,7 @@ describe('buildPostList', () => {
     mkdirSync(join(tempDir, 'docs', 'reference', 'specification'), { recursive: true });
   });
 
-  afterAll(() => {
+  afterEach(() => {
     rmSync(tempDir, { recursive: true, force: true });
   });
 
@@ -114,7 +118,6 @@ describe('buildPostList', () => {
   })
 
   it('handles specification files with "next-spec" in the filename correctly', async () => {
-
     const specDir = join(tempDir, 'docs', 'reference', 'specification')
     writeFileSync(
       join(specDir, 'v2.1.0-next-spec.1.mdx'),
@@ -128,7 +131,6 @@ describe('buildPostList', () => {
   })
 
   it('handles specification files with "explorer" in the filename correctly', async () => {
-
     const specDir = join(tempDir, 'docs', 'reference', 'specification')
     writeFileSync(
       join(specDir, 'explorer.mdx'),
@@ -140,5 +142,4 @@ describe('buildPostList', () => {
     const output = JSON.parse(readFileSync(writeFilePath, 'utf-8'))
 
   })
-
 });
