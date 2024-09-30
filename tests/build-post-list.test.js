@@ -1,6 +1,6 @@
-const { existsSync, readdirSync,statSync,readFileSync, writeFileSync, mkdirSync, rmSync } = require('fs');
+const { existsSync, readdirSync, readFileSync, writeFileSync, mkdirSync, rmSync } = require('fs');
 const { resolve, join } = require('path');
-const buildPostList = require('../scripts/build-post-list');
+const { buildPostList, slugifyToC } = require('../scripts/build-post-list');
 
 describe('buildPostList', () => {
   const tempDir = resolve(__dirname, 'tempTestDir');
@@ -57,9 +57,9 @@ describe('buildPostList', () => {
     writeFileSync(join(tempDir, 'docs', 'section1', '_section.mdx'), '---\ntitle: Section 1\n---\nThis is section 1.');
 
     await buildPostList(postDirectories, tempDir, writeFilePath);
-    
+
     const output = JSON.parse(readFileSync(writeFilePath, 'utf-8'));
-    
+
     expect(output.docs.length).toBeGreaterThan(0);
     expect(output.docs.find(item => item.title === 'Section 1')).toBeDefined();
   });
@@ -81,37 +81,24 @@ describe('buildPostList', () => {
     expect(secondReleaseNote.title).toBe('Release Notes 2.1.1');
   });
 
-  // it('handles specification files correctly', async () => {
-  //   mkdirSync(join(tempDir, 'docs', 'reference', 'specification'), { recursive: true });
-  //   writeFileSync(join(tempDir, 'docs', 'reference', 'specification', 'v2.0.0.mdx'), '# Specification v2.0.0');
-  //   writeFileSync(join(tempDir, 'docs', 'reference', 'specification', 'v2.1.0-next-spec.1.mdx'), '# Specification v2.1.0-next-spec.1');
-  //   writeFileSync(join(tempDir, 'docs', 'reference', 'specification', 'v3.0.0-explorer.mdx'), '# Specification v3.0.0 Explorer');
-
-  //   await buildPostList(modifiedPostDirectories, tempDir, writeFilePath);
-    
-  //   const output = JSON.parse(readFileSync(writeFilePath, 'utf-8'));
-    
-
-  //   const spec200 = output.docs.find(item => item.slug === '/docs/reference/specification/v2.0.0');
-  //   console.log('spec200:', spec200);
-  //   expect(spec200).toBeDefined();
-  //   expect(spec200.title).toBe('2.0.0');
-  //   expect(spec200.weight).toBeLessThan(100);
-
-  //   const spec210Next = output.docs.find(item => item.slug === '/docs/reference/specification/v2.1.0-next-spec.1');
-  //   console.log('spec210Next:', spec210Next);
-  //   expect(spec210Next).toBeDefined();
-  //   expect(spec210Next.title).toBe('2.1.0 (Pre-release)');
-  //   expect(spec210Next.isPrerelease).toBe(true);
-
-  //   const spec300Explorer = output.docs.find(item => item.slug === '/docs/reference/specification/v3.0.0-explorer');
-  //   console.log('spec300Explorer:', spec300Explorer);
-  //   expect(spec300Explorer).toBeDefined();
-  //   expect(spec300Explorer.title).toBe('3.0.0 - Explorer');
-  // });
-
   it('handles errors gracefully', async () => {
     const invalidDir = [join(tempDir, 'non-existent-dir'), '/invalid'];
     await expect(buildPostList([invalidDir], tempDir, writeFilePath)).rejects.toThrow();
   });
+
+  it('handles heading ids like {# myHeadingId}', () => {
+    const input = '## My Heading {#custom-id}';
+    expect(slugifyToC(input)).toBe('custom-id');
+  });
+
+  it('handles heading ids like {<a name="myHeadingId"/>}', () => {
+    const input = '## My Heading {<a name="custom-anchor-id"/>}';
+    expect(slugifyToC(input)).toBe('custom-anchor-id');
+  });
+
+
+  it('handles empty strings', () => {
+    expect(slugifyToC('')).toBe('');
+  });
+
 });

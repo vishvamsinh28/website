@@ -26,7 +26,7 @@ const addItem = (details) => {
   else { }
 }
 
-module.exports = async function buildPostList(postDirectories, basePath, writeFilePath) {
+async function buildPostList(postDirectories, basePath, writeFilePath) {
   try {
     walkDirectories(postDirectories, result, basePath)
     const treePosts = buildNavTree(result["docs"].filter((p) => p.slug.startsWith('/docs/')))
@@ -156,3 +156,5 @@ function isDirectory(dir) {
 function capitalize(text) {
   return text.split(/[\s\-]/g).map(word => `${word[0].toUpperCase()}${word.substr(1)}`).join(' ')
 }
+
+module.exports = {slugifyToC, buildPostList}
