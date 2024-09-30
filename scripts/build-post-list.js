@@ -37,7 +37,7 @@ module.exports = async function buildPostList(postDirectories, basePath, writeFi
     }
     writeFileSync(writeFilePath, JSON.stringify(result, null, '  '))
   } catch (error) {
-    throw new Error('Error while building post list:', error);
+    throw new Error(`Error while building post list: ${error.message}`);
   }
 }
 
