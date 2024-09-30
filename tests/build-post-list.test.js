@@ -96,9 +96,66 @@ describe('buildPostList', () => {
     expect(slugifyToC(input)).toBe('custom-anchor-id');
   });
 
-
   it('handles empty strings', () => {
     expect(slugifyToC('')).toBe('');
   });
+
+  // it('handles specification files without a title correctly', async () => {
+  //   // Create a specification file without a title
+  //   const specDir = join(tempDir, 'docs', 'reference', 'specification')
+  //   writeFileSync(
+  //     join(specDir, 'v2.1.0.mdx'),
+  //     '---\n---\nContent of specification v2.1.0.'
+  //   )
+
+  //   await buildPostList(postDirectories, tempDir, writeFilePath)
+
+  //   const output = JSON.parse(readFileSync(writeFilePath, 'utf-8'))
+
+  //   const specEntry = output.docs.find(
+  //     (item) => item.slug === '/docs/reference/specification/v2.1.0'
+  //   )
+  //   expect(specEntry.title).toBe('2.1.0')
+  //   expect(specEntry.weight).toBe(100) // Assuming specWeight starts at 100
+  // })
+
+  // it('handles specification files with "next-spec" in the filename correctly', async () => {
+  //   // Create a pre-release specification file without a title
+  //   const specDir = join(tempDir, 'docs', 'reference', 'specification')
+  //   writeFileSync(
+  //     join(specDir, 'v2.1.0-next-spec.1.mdx'),
+  //     '---\n---\nContent of pre-release specification v2.1.0-next-spec.1.'
+  //   )
+
+  //   await buildPostList(postDirectories, tempDir, writeFilePath)
+
+  //   const output = JSON.parse(readFileSync(writeFilePath, 'utf-8'))
+
+  //   const specEntry = output.docs.find(
+  //     (item) => item.slug === '/docs/reference/specification/v2.1.0-next-spec.1'
+  //   )
+  //   expect(specEntry.title).toBe('2.1.0 (Pre-release)')
+  //   expect(specEntry.weight).toBe(99) // specWeight decremented
+  //   expect(specEntry.isPrerelease).toBe(true)
+  // })
+
+  // it('handles specification files with "explorer" in the filename correctly', async () => {
+  //   // Create a specification file with "explorer" in the filename
+  //   const specDir = join(tempDir, 'docs', 'reference', 'specification')
+  //   writeFileSync(
+  //     join(specDir, 'explorer.mdx'),
+  //     '---\n---\nContent of explorer specification.'
+  //   )
+
+  //   await buildPostList(postDirectories, tempDir, writeFilePath)
+
+  //   const output = JSON.parse(readFileSync(writeFilePath, 'utf-8'))
+
+  //   const specEntry = output.docs.find(
+  //     (item) => item.slug === '/docs/reference/specification/explorer'
+  //   )
+  //   expect(specEntry.title).toBe('Explorer - Explorer')
+  //   expect(specEntry.weight).toBe(98) // specWeight decremented
+  // })
 
 });
