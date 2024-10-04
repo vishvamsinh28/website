@@ -18,19 +18,15 @@ describe('buildPostList', () => {
 
     mkdirSync(tempDir, { recursive: true });
 
-    // Create blog directory with a release note
     mkdirSync(join(tempDir, 'blog'), { recursive: true });
     writeFileSync(join(tempDir, 'blog', 'release-notes-2.1.0.mdx'), '---\ntitle: Release Notes 2.1.0\n---\nThis is a release note.');
 
-    // Create docs directory with an index file
     mkdirSync(join(tempDir, 'docs'), { recursive: true });
     writeFileSync(join(tempDir, 'docs', 'index.mdx'), '---\ntitle: Docs Home\n---\nThis is the documentation homepage.');
 
-    // Create about directory with an index file
     mkdirSync(join(tempDir, 'about'), { recursive: true });
     writeFileSync(join(tempDir, 'about', 'index.mdx'), '---\ntitle: About Us\n---\nThis is the about page.');
 
-    // Create directories for specification files
     mkdirSync(join(tempDir, 'docs', 'reference', 'specification'), { recursive: true });
   });
 
