@@ -8,7 +8,7 @@ describe('buildPostList', () => {
   let postDirectories;
 
   beforeEach(() => {
-    tempDir = resolve(__dirname, `tempTestDir_${Date.now()}`);
+    tempDir = resolve(__dirname, `test-config`);
     writeFilePath = resolve(tempDir, 'posts.json');
     postDirectories = [
       [join(tempDir, 'blog'), '/blog'],
