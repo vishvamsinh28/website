@@ -136,6 +136,5 @@ describe('buildPostList', () => {
     await buildPostList(postDirectories, tempDir, writeFilePath)
 
     const output = JSON.parse(readFileSync(writeFilePath, 'utf-8'))
-
   })
 });
