@@ -97,5 +97,4 @@ describe('buildNewsroomVideos', () => {
             expect(err.message).toMatch(/ENOENT|EACCES/);
         }
     });
-
 });
