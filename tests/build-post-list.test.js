@@ -1,5 +1,5 @@
 const { existsSync, readFileSync, writeFileSync, mkdirSync, rmSync } = require('fs');
-const { resolve, join } = require('path');
+const { join } = require('path');
 const { buildPostList, slugifyToC } = require('../scripts/build-post-list');
 
 describe('buildPostList', () => {
@@ -8,8 +8,8 @@ describe('buildPostList', () => {
   let postDirectories;
 
   beforeEach(() => {
-    tempDir = resolve(__dirname, `test-config`);
-    writeFilePath = resolve(tempDir, 'posts.json');
+    tempDir = join(__dirname, 'test-config');
+    writeFilePath = join(tempDir, 'posts.json');
     postDirectories = [
       [join(tempDir, 'blog'), '/blog'],
       [join(tempDir, 'docs'), '/docs'],
@@ -159,7 +159,6 @@ describe('buildPostList', () => {
     expect(error.message).toMatch(/Error while building post list/);
   });
 
-
   it('throws an error if the front matter cannot be parsed', async () => {
     writeFileSync(join(tempDir, 'docs', 'invalid.mdx'), '---\ninvalid front matter\n---\nContent');
 
@@ -175,7 +174,6 @@ describe('buildPostList', () => {
   });
 
   it('throws an error if no post directories are provided', async () => {
-
     let error;
 
     try {
@@ -187,5 +185,5 @@ describe('buildPostList', () => {
     expect(error).toBeDefined();
     expect(error.message).toMatch(/Error while building post list/);
   });
-  
+
 });
