@@ -145,4 +145,47 @@ describe('buildPostList', () => {
     expect(explorerEntry).toBeUndefined();
   });
 
+  it('throws an error if the directory cannot be read', async () => {
+    const invalidDir = [join(tempDir, 'non-existent-dir'), '/invalid'];
+
+    let error;
+    try {
+      await buildPostList([invalidDir], tempDir, writeFilePath);
+    } catch (err) {
+      error = err;
+    }
+
+    expect(error).toBeDefined();
+    expect(error.message).toMatch(/Error while building post list/);
+  });
+
+
+  it('throws an error if the front matter cannot be parsed', async () => {
+    writeFileSync(join(tempDir, 'docs', 'invalid.mdx'), '---\ninvalid front matter\n---\nContent');
+
+    let error;
+    try {
+      await buildPostList(postDirectories, tempDir, writeFilePath);
+    } catch (err) {
+      error = err;
+    }
+
+    expect(error).toBeDefined();
+    expect(error.message).toMatch(/Error while building post list/);
+  });
+
+  it('throws an error if no post directories are provided', async () => {
+
+    let error;
+
+    try {
+      await buildPostList([], tempDir, writeFilePath);
+    } catch (err) {
+      error = err;
+    }
+
+    expect(error).toBeDefined();
+    expect(error.message).toMatch(/Error while building post list/);
+  });
+  
 });

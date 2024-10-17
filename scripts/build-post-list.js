@@ -28,6 +28,9 @@ const addItem = (details) => {
 
 async function buildPostList(postDirectories, basePath, writeFilePath) {
   try {
+    if (postDirectories.length === 0) {
+      throw new Error('Error while building post list: No post directories provided');
+    }
     walkDirectories(postDirectories, result, basePath)
     const treePosts = buildNavTree(result["docs"].filter((p) => p.slug.startsWith('/docs/')))
     result["docsTree"] = treePosts
