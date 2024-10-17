@@ -1,5 +1,5 @@
 const { existsSync, readFileSync, writeFileSync, mkdirSync, rmSync } = require('fs');
-const { join } = require('path');
+const { join, resolve } = require('path');
 const { buildPostList, slugifyToC } = require('../scripts/build-post-list');
 const os = require('os');
 
@@ -7,10 +7,10 @@ describe('buildPostList', () => {
   let tempDir;
   let writeFilePath;
   let postDirectories;
-  const lineBreak = os.EOL; // Use OS-specific line endings
+  const lineBreak = os.EOL;
 
   beforeEach(() => {
-    tempDir = join(__dirname, 'test-config');
+    tempDir = resolve(__dirname, 'test-config');
     writeFilePath = join(tempDir, 'posts.json');
     postDirectories = [
       [join(tempDir, 'blog'), '/blog'],
