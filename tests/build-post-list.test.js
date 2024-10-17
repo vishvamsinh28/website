@@ -1,11 +1,13 @@
 const { existsSync, readFileSync, writeFileSync, mkdirSync, rmSync } = require('fs');
 const { join } = require('path');
 const { buildPostList, slugifyToC } = require('../scripts/build-post-list');
+const os = require('os');
 
 describe('buildPostList', () => {
   let tempDir;
   let writeFilePath;
   let postDirectories;
+  const lineBreak = os.EOL; // Use OS-specific line endings
 
   beforeEach(() => {
     tempDir = join(__dirname, 'test-config');
@@ -19,13 +21,13 @@ describe('buildPostList', () => {
     mkdirSync(tempDir, { recursive: true });
 
     mkdirSync(join(tempDir, 'blog'), { recursive: true });
-    writeFileSync(join(tempDir, 'blog', 'release-notes-2.1.0.mdx'), '---\ntitle: Release Notes 2.1.0\n---\nThis is a release note.');
+    writeFileSync(join(tempDir, 'blog', 'release-notes-2.1.0.mdx'), '---' + lineBreak + 'title: Release Notes 2.1.0' + lineBreak + '---' + lineBreak + 'This is a release note.');
 
     mkdirSync(join(tempDir, 'docs'), { recursive: true });
-    writeFileSync(join(tempDir, 'docs', 'index.mdx'), '---\ntitle: Docs Home\n---\nThis is the documentation homepage.');
+    writeFileSync(join(tempDir, 'docs', 'index.mdx'), '---' + lineBreak + 'title: Docs Home' + lineBreak + '---' + lineBreak + 'This is the documentation homepage.');
 
     mkdirSync(join(tempDir, 'about'), { recursive: true });
-    writeFileSync(join(tempDir, 'about', 'index.mdx'), '---\ntitle: About Us\n---\nThis is the about page.');
+    writeFileSync(join(tempDir, 'about', 'index.mdx'), '---' + lineBreak + 'title: About Us' + lineBreak + '---' + lineBreak + 'This is the about page.');
 
     mkdirSync(join(tempDir, 'docs', 'reference', 'specification'), { recursive: true });
   });
@@ -54,7 +56,7 @@ describe('buildPostList', () => {
 
   it('handles a directory with only section files', async () => {
     mkdirSync(join(tempDir, 'docs', 'section1'), { recursive: true });
-    writeFileSync(join(tempDir, 'docs', 'section1', '_section.mdx'), '---\ntitle: Section 1\n---\nThis is section 1.');
+    writeFileSync(join(tempDir, 'docs', 'section1', '_section.mdx'), '---' + lineBreak + 'title: Section 1' + lineBreak + '---' + lineBreak + 'This is section 1.');
 
     await buildPostList(postDirectories, tempDir, writeFilePath);
 
@@ -65,7 +67,7 @@ describe('buildPostList', () => {
   });
 
   it('handles multiple release notes correctly', async () => {
-    writeFileSync(join(tempDir, 'blog', 'release-notes-2.1.1.mdx'), '---\ntitle: Release Notes 2.1.1\n---\nThis is a release note.');
+    writeFileSync(join(tempDir, 'blog', 'release-notes-2.1.1.mdx'), '---' + lineBreak + 'title: Release Notes 2.1.1' + lineBreak + '---' + lineBreak + 'This is a release note.');
 
     await buildPostList(postDirectories, tempDir, writeFilePath);
 
@@ -104,7 +106,7 @@ describe('buildPostList', () => {
     const specDir = join(tempDir, 'docs', 'reference', 'specification');
     writeFileSync(
       join(specDir, 'v2.1.0-no-title.mdx'),
-      '---\n---\nContent of specification without a title.'
+      '---' + lineBreak + '---' + lineBreak + 'Content of specification without a title.'
     );
 
     await buildPostList(postDirectories, tempDir, writeFilePath);
@@ -119,7 +121,7 @@ describe('buildPostList', () => {
     const specDir = join(tempDir, 'docs', 'reference', 'specification');
     writeFileSync(
       join(specDir, 'v2.1.0-next-spec.1.mdx'),
-      '---\n---\nContent of pre-release specification v2.1.0-next-spec.1.'
+      '---' + lineBreak + '---' + lineBreak + 'Content of pre-release specification v2.1.0-next-spec.1.'
     );
 
     await buildPostList(postDirectories, tempDir, writeFilePath);
@@ -134,7 +136,7 @@ describe('buildPostList', () => {
     const specDir = join(tempDir, 'docs', 'reference', 'specification');
     writeFileSync(
       join(specDir, 'explorer.mdx'),
-      '---\n---\nContent of explorer specification.'
+      '---' + lineBreak + '---' + lineBreak + 'Content of explorer specification.'
     );
 
     await buildPostList(postDirectories, tempDir, writeFilePath);
@@ -160,7 +162,7 @@ describe('buildPostList', () => {
   });
 
   it('throws an error if the front matter cannot be parsed', async () => {
-    writeFileSync(join(tempDir, 'docs', 'invalid.mdx'), '---\ninvalid front matter\n---\nContent');
+    writeFileSync(join(tempDir, 'docs', 'invalid.mdx'), '---' + lineBreak + 'invalid front matter' + lineBreak + '---' + lineBreak + 'Content');
 
     let error;
     try {
