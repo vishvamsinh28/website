@@ -100,41 +100,49 @@ describe('buildPostList', () => {
     expect(slugifyToC('')).toBe('');
   });
 
-  it('handles specification files without a title correctly', async () => {
-    const specDir = join(tempDir, 'docs', 'reference', 'specification')
+  it('does not process specification files without a title', async () => {
+    const specDir = join(tempDir, 'docs', 'reference', 'specification');
     writeFileSync(
-      join(specDir, 'v2.1.0.mdx'),
-      '---\n---\nContent of specification v2.1.0.'
-    )
+      join(specDir, 'v2.1.0-no-title.mdx'),
+      '---\n---\nContent of specification without a title.'
+    );
 
-    await buildPostList(postDirectories, tempDir, writeFilePath)
+    await buildPostList(postDirectories, tempDir, writeFilePath);
 
-    const output = JSON.parse(readFileSync(writeFilePath, 'utf-8'))
+    const output = JSON.parse(readFileSync(writeFilePath, 'utf-8'));
+    const noTitleEntry = output.docs.find(item => item.slug.includes('/reference/specification/v2.1.0-no-title'));
 
-  })
+    expect(noTitleEntry).toBeUndefined();
+  });
 
-  it('handles specification files with "next-spec" in the filename correctly', async () => {
-    const specDir = join(tempDir, 'docs', 'reference', 'specification')
+  it('does not process specification files with "next-spec" in the filename', async () => {
+    const specDir = join(tempDir, 'docs', 'reference', 'specification');
     writeFileSync(
       join(specDir, 'v2.1.0-next-spec.1.mdx'),
       '---\n---\nContent of pre-release specification v2.1.0-next-spec.1.'
-    )
+    );
 
-    await buildPostList(postDirectories, tempDir, writeFilePath)
+    await buildPostList(postDirectories, tempDir, writeFilePath);
 
-    const output = JSON.parse(readFileSync(writeFilePath, 'utf-8'))
+    const output = JSON.parse(readFileSync(writeFilePath, 'utf-8'));
+    const nextSpecEntry = output.docs.find(item => item.slug.includes('/reference/specification/v2.1.0-next-spec.1'));
 
-  })
+    expect(nextSpecEntry).toBeUndefined();
+  });
 
-  it('handles specification files with "explorer" in the filename correctly', async () => {
-    const specDir = join(tempDir, 'docs', 'reference', 'specification')
+  it('does not process specification files with "explorer" in the filename', async () => {
+    const specDir = join(tempDir, 'docs', 'reference', 'specification');
     writeFileSync(
       join(specDir, 'explorer.mdx'),
       '---\n---\nContent of explorer specification.'
-    )
+    );
 
-    await buildPostList(postDirectories, tempDir, writeFilePath)
+    await buildPostList(postDirectories, tempDir, writeFilePath);
 
-    const output = JSON.parse(readFileSync(writeFilePath, 'utf-8'))
-  })
+    const output = JSON.parse(readFileSync(writeFilePath, 'utf-8'));
+    const explorerEntry = output.docs.find(item => item.slug.includes('/reference/specification/explorer'));
+
+    expect(explorerEntry).toBeUndefined();
+  });
+
 });
