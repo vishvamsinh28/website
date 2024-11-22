@@ -94,5 +94,4 @@ describe('buildTools', () => {
             expect(err.message).toMatch(/ENOENT|EACCES/);
         }
     });
-
 });
