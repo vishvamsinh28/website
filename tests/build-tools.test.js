@@ -90,7 +90,7 @@ describe('buildTools', () => {
         } catch (err) {
             expect(err.message).toMatch(/ENOENT|EACCES/);
         }
-        
+
     });
 
 });
