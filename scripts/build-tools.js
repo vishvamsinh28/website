@@ -23,7 +23,6 @@ if (require.main === module) {
   const manualToolsPath = resolve(__dirname, '../config', 'tools-manual.json');
   const toolsPath = resolve(__dirname, '../config', 'tools.json');
   const tagsPath = resolve(__dirname, '../config', 'all-tags.json');
-
   buildTools(automatedToolsPath, manualToolsPath, toolsPath, tagsPath);
 }
 
